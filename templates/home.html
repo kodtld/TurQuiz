@@ -1,0 +1,72 @@
+<style>
+    .body{
+        overflow-x: hidden;
+        width: 100%; 
+        background-color: {{color}};
+    }
+    
+    .title{
+        border: 3px;
+        font-family: Verdana, Tahoma, sans-serif;
+        font-weight: bold;
+        font-size: 58;
+        display: inline-block;
+        margin-right: 60%;
+        margin-left: 1.5%;
+        color: {{title_color}};
+    }
+
+    .titlediv{
+        padding-left: 2%;
+        padding-right: 2%;
+        width: 100%;
+        margin-bottom: 7.5%;
+    }
+    
+    button{
+        display: inline-block;
+        font-family: Verdana, Tahoma, sans-serif;
+        font-weight: bold;
+        font-size: 32;
+        border-radius: 50px;
+        border: 0;
+        padding: 5px 20px 5px;
+        margin-right: 1%;
+        color: {{color}};
+        background-color: {{title_color}};
+    }
+
+    .quotediv{
+        width: 60%;
+        margin-left: 20%;
+        align-items: center;
+    }
+
+    .quote{
+        font-family: Verdana, Tahoma, sans-serif;
+        font-weight: bold;
+        font-size: 78;
+        text-align: center;
+        color: {{title_color}};
+    }
+
+    .author{
+        font-family: Verdana, Tahoma, sans-serif;
+        font-size: 28;
+        text-align: right;
+        color: {{title_color}};
+    }
+
+</style>
+
+<body class="body">
+        <div class="titlediv">
+                <h1 class="title">TurQuiz</h1> 
+                <button>Login</button>
+                <button>Register</button>
+        </div>
+        <div class="quotediv">
+            <h1 class="quote">"{{quote}}"</h1>
+            <p class="author">- {{author}}</p>
+        </div>
+</body>
