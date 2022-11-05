@@ -9,6 +9,6 @@ Sovelluksen ominaisuuksia ovat:
 * Käyttäjä näkee kaksi erillistä listaa: Omat visat ja Community visat.
 * Käyttäjä voi filtteröidä visoja hakusanalla.
 * Käyttäjä voi pelata näkyvilla olevia visoja.
-** Pelaaminen tapahtuu täyttämällä lomake, joka palautetaan lopuksi. Lomakkeen palautettuaan käyttäjä näkee omat pisteensä, sekä oman highscorensa.
+    * Pelaaminen tapahtuu täyttämällä lomake, joka palautetaan lopuksi. Lomakkeen palautettuaan käyttäjä näkee omat pisteensä, sekä oman highscorensa.
 * Käyttäjä voi luoda omia visoja, jotka voivat olla joko private tai public.
-** Visaa luodessa käyttäjä antaa kysymyksen ja neljä vastausvaihtoehtoa, joista yksi on oikea.
+    * Visaa luodessa käyttäjä antaa kysymyksen ja neljä vastausvaihtoehtoa, joista yksi on oikea.
