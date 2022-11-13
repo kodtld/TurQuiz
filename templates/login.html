@@ -4,9 +4,15 @@
         width: 100%; 
         background-color: {{color}};
     }
-    
-    .title{
-        border: 3px;
+
+    .titlediv{
+        padding-left: 2%;
+        padding-right: 2%;
+        width: 100%;
+        margin-bottom: 1.5%;
+    }
+
+    h1{
         font-family: Verdana, Tahoma, sans-serif;
         font-weight: bold;
         font-size: 58;
@@ -16,11 +22,23 @@
         color: {{title_color}};
     }
 
-    .titlediv{
-        padding-left: 2%;
-        padding-right: 2%;
-        width: 100%;
-        margin-bottom: 7.5%;
+    p{
+        font-family: Verdana, Tahoma, sans-serif;
+        font-weight: bold;
+        font-size: 26;
+        text-align: center;
+        margin-bottom: 35px;
+        color: {{title_color}};
+    }
+
+    h3{
+        font-family: Verdana, Tahoma, sans-serif;
+        font-weight: bold;
+        font-size: 52;
+        text-align: center;
+        margin-bottom: 0px;
+        margin-top: 20px;
+        color: {{title_color}};
     }
     
     a{
@@ -35,18 +53,104 @@
         color: {{color}};
         background-color: {{title_color}};
     }
+
     a:link { text-decoration: none; }
+    
     a:visited { text-decoration: none; }
+    
     a:hover { text-decoration: none; 
                 color: white;}
 
+    .formcontainer{
+        width: 40%;
+        margin-left: 30%;
+        padding-bottom: 15px;
+        
+    }
+    input{
+        padding: 20px 50px 20px;
+        font-size: 24px;
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+        border: solid 1px;
+        margin-bottom: 35px;
+        border-radius: 50px;
+        color: {{title_color}};
+        background-color: white;
+        border-color: {{title_color}};
+    }
+    ::placeholder{
+        color: {{title_color}};
+    }
+    button{
+        font-family: Verdana, Tahoma, sans-serif;
+        font-weight: bold;
+        font-size: 35px;
+        border-radius: 50px;
+        border: 0;
+        padding: 10px 25px 10px;
+        display: inline-block;
+        color: {{color}};
+        background-color: {{title_color}};
+    }
+    button:hover { text-decoration: none; 
+                color: white;}
+
+    .tokap{
+        font-family: Verdana, Tahoma, sans-serif;
+        font-size: 23px;
+        font-weight: normal;
+        text-align: none;
+        margin-bottom: 35px;
+        margin-left: 35px;
+        display: inline-block;
+        color: {{title_color}};
+    }
+
+    .tokaa{
+        display: inline-block;
+        font-family: Verdana, Tahoma, sans-serif;
+        font-weight: normal;
+        text-decoration: underline;
+        font-size: 23px;
+        border-radius: none;
+        border: none;
+        padding: 0px;
+        margin-right: 0px;
+        background-color: {{color}};
+        color: {{title_color}};
+    }
+
+    .tokaa:link { text-decoration: underline; }
+    
+    .tokaa:visited { text-decoration: underline; }
+    
+    .tokaa:hover { text-decoration: underline; 
+                color: white;}
+
+    .remember {
+        display: inline-block;
+    }
 </style>
 
 <body class="body">
         <div class="titlediv">
                 <h1 class="title">TurQuiz</h1>
-                <a href="{{ url_for('index') }}">Back</a>
+                <a href="{{ url_for('index') }}">Home</a>
                 <a href="{{ url_for('register') }}">Register</a> 
         </div>
-
+        <div class="formcontainer">
+            <div class="regtitle">
+                <h3>Log in to your account</h3>
+                <p>Please fill out your information below:</p>
+            </div>
+            <form method="POST" action="/login">
+                {{ form.hidden_tag() }}
+                {{ form.username }}
+                {{ form.password }}
+                <button type="submit">Log in</button>
+                <p class="tokap">Don't have an account yet? <a class="tokaa" href="{{ url_for('register') }}">Register</a> instead.</p>
+            </form>
+        </div>
 </body>

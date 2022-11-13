@@ -86,7 +86,7 @@
     button{
         font-family: Verdana, Tahoma, sans-serif;
         font-weight: bold;
-        font-size: 40;
+        font-size: 35px;
         border-radius: 50px;
         border: 0;
         padding: 10px 25px 10px;
@@ -103,7 +103,7 @@
         font-weight: normal;
         text-align: none;
         margin-bottom: 35px;
-        margin-left: 20px;
+        margin-left: 35px;
         display: inline-block;
         color: {{title_color}};
     }
@@ -133,7 +133,7 @@
 <body class="body">
         <div class="titlediv">
                 <h1 class="title">TurQuiz</h1>
-                <a href="{{ url_for('index') }}">Back</a>
+                <a href="{{ url_for('index') }}">Home</a>
                 <a href="{{ url_for('login') }}">Login</a> 
         </div>
         <div class="formcontainer">
@@ -141,14 +141,13 @@
                 <h3>Register your account</h3>
                 <p>Please fill out your personal information below:</p>
             </div>
-            <form>
-                <input type="text" placeholder="Name...">
-                <input type="text" placeholder="Username...">
-                <input type="text" placeholder="Email...">
-                <input type="text" placeholder="Password...">
+            <form method="POST" action="/register">
+                {{ form.hidden_tag() }}
+                {{ form.username }}
+                {{ form.email }}
+                {{ form.password }}
                 <button type="submit">Submit</button>
                 <p class="tokap">Already have an account? <a class="tokaa" href="{{ url_for('login') }}">Login</a> instead.</p>
             </form>
         </div>
-
 </body>
