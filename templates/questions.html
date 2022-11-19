@@ -1,0 +1,164 @@
+<style>
+
+    .body{
+        overflow-x: hidden;
+        width: 100%; 
+        background-color: {{color}};
+    }
+    
+    .title{
+        font-family: Verdana, Tahoma, sans-serif;
+        font-weight: bold;
+        font-size: 58;
+        display: inline-block;
+        margin-right: 60%;
+        margin-left: 1.5%;
+        color: {{title_color}};
+    }
+
+    .titlediv{
+        padding-left: 2%;
+        padding-right: 2%;
+        width: 100%;
+
+    }
+    
+    .nav_a{
+        display: inline-block;
+        font-family: Verdana, Tahoma, sans-serif;
+        font-weight: bold;
+        font-size: 32;
+        border-radius: 50px;
+        border: 0;
+        padding: 5px 20px 5px;
+        margin-right: 1%;
+        color: white;
+        background-color: {{title_color}};
+    }
+
+    a:link { text-decoration: none; }
+    a:visited { text-decoration: none; }
+    a:hover { text-decoration: none; 
+                color: {{color}};}
+    
+    
+    .formcontainer{
+        width: 60%;
+        margin-left: 20%;
+        padding-top: 35px;
+        border-top: 2px solid {{title_color}};
+        
+    }
+    
+    input{
+        padding: 20px 50px 20px;
+        font-size: 20px;
+        display: inline-block;
+        margin: 0 auto;
+        width: 45%;
+        margin-left: 2.5%;
+        border: solid 1px;
+        margin-bottom: 35px;
+        border-radius: 50px;
+        color: {{title_color}};
+        background-color: white;
+        border-color: {{title_color}};
+    }
+    ::placeholder{
+        color: {{title_color}};
+    }
+
+
+    button, a{
+        font-family: Verdana, Tahoma, sans-serif;
+        font-weight: bold;
+        font-size: 30px;
+        border-radius: 50px;
+        border: 0;
+        padding: 15px 25px 15px;
+        margin-right: 20px;
+
+        color: {{color}};
+        background-color: {{title_color}};
+    }
+    button:hover, a:hover { text-decoration: none; 
+                color: white;}
+    .btnbox{
+        margin-left: 49%;
+    }
+
+    h1{
+        font-family: Verdana, Tahoma, sans-serif;
+        font-weight: bold;
+        font-size: 40;
+        text-align: center;
+        color: {{title_color}};
+    }
+</style>
+
+<!Doctype html>
+<body class="body">
+        <div class="titlediv">
+                <h1 class="title">TurQuiz</h1>
+                <a href="{{ url_for('logout') }}" class="nav_a">Logout</a>
+        </div>
+
+        <form method="POST" action="/{{subject}}/{{subject_id}}/questions">
+            <h1>Question for quiz on the topic of: "{{subject}}"</h1>
+            <div class="formcontainer">
+                {{ form.hidden_tag() }}
+                {{ form.question_1 }} <br>
+                {{ form.q1_answer }}
+                {{ form.q1_option_1 }}
+                {{ form.q1_option_2 }}
+                {{ form.q1_option_3 }}
+            </div>
+            <!-- <div class="formcontainer">
+                {{ form.question_2 }} <br>
+                {{ form.q2_answer }}
+                {{ form.q2_option_1 }}
+                {{ form.q2_option_2 }}
+                {{ form.q2_option_3 }}
+            </div>
+            <div class="formcontainer">
+                {{ form.question_3 }} <br>
+                {{ form.q3_answer }}
+                {{ form.q3_option_1 }}
+                {{ form.q3_option_2 }}
+                {{ form.q3_option_3 }}
+            </div>
+            <div class="formcontainer">
+                {{ form.question_4 }} <br>
+                {{ form.q4_answer }}
+                {{ form.q4_option_1 }}
+                {{ form.q4_option_2 }}
+                {{ form.q4_option_3 }}
+            </div>
+            <div class="formcontainer">
+                {{ form.question_5 }} <br>
+                {{ form.q5_answer }}
+                {{ form.q5_option_1 }}
+                {{ form.q5_option_2 }}
+                {{ form.q5_option_3 }}
+            </div>
+            <div class="formcontainer">
+                {{ form.question_6 }} <br>
+                {{ form.q6_answer }}
+                {{ form.q6_option_1 }}
+                {{ form.q6_option_2 }}
+                {{ form.q6_option_3 }}
+            </div>
+            <div class="formcontainer">
+                {{ form.question_7 }} <br>
+                {{ form.q7_answer }}
+                {{ form.q7_option_1 }}
+                {{ form.q7_option_2 }}
+                {{ form.q7_option_3 }}
+            </div> -->
+            <div class="btnbox">
+                <a href="{{ url_for('dash') }}">Done</a>
+                <button type="submit">Save / Add another</button>
+            </div>
+        </form>
+
+</body>

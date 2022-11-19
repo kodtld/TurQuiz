@@ -5,6 +5,8 @@ from models.color import colors, title_colors
 from models.quote import quotes
 from forms.loginform import LoginForm
 from forms.registerform import RegisterForm
+from forms.create_quiz import QuizForm
+from forms.create_questions import QuestionForm
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -23,6 +25,21 @@ class Users(UserMixin, db.Model):
         username = db.Column(db.String(15), unique=True)
         email = db.Column(db.String(50), unique=True)
         password = db.Column(db.String(80))
+        
+class Quizs(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        subject = db.Column(db.String(25), unique=True)
+        private = db.Column(db.Boolean)
+        creator_id = db.Column(db.Integer)
+
+class Questions(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        question = db.Column(db.String(120))
+        answer = db.Column(db.String(50))
+        option_1 = db.Column(db.String(50))
+        option_2 = db.Column(db.String(50))
+        option_3 = db.Column(db.String(50))
+        quiz_id = db.Column(db.Integer)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -78,3 +95,42 @@ def dash():
         title_color = title_colors[0]
 
         return render_template('dash.html', color = color.code, title_color = title_color.code, username = current_user.username)
+
+@app.route('/new', methods=['GET', 'POST'])
+@login_required
+def new():
+        color = choice(colors)
+        title_color = title_colors[0]
+        
+        form = QuizForm()
+        if form.validate_on_submit():
+                new_quiz = Quizs(subject=form.subject.data,private=form.private.data,creator_id=current_user.id)
+                db.session.add(new_quiz)
+                db.session.commit()
+                created_quiz = Quizs.query.filter_by(subject=form.subject.data).first()
+
+                return redirect(url_for('questions', subject=form.subject.data, subject_id=created_quiz.id))
+        return render_template('new.html', color = color.code, title_color = title_color.code, form = form)
+
+@app.route('/<subject>/<subject_id>/questions', methods=['GET', 'POST'])
+@login_required
+def questions(subject,subject_id):
+        color = choice(colors)
+        title_color = title_colors[0]
+
+        form = QuestionForm()
+
+        if form.validate_on_submit():
+                new_question = Questions(
+                        question = form.question_1.data,
+                        answer = form.q1_answer.data,
+                        option_1 = form.q1_option_1.data,
+                        option_2 = form.q1_option_2.data,
+                        option_3 = form.q1_option_3.data,
+                        quiz_id = subject_id
+                )
+                db.session.add(new_question)
+                db.session.commit()
+                return redirect(url_for('questions', subject=subject, subject_id=subject_id))
+
+        return render_template('questions.html', color = color.code, title_color = title_color.code, form = form, subject=subject, subject_id = subject_id)

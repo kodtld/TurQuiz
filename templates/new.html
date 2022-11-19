@@ -1,0 +1,114 @@
+<style>
+
+    .body{
+        overflow-x: hidden;
+        width: 100%; 
+        background-color: {{color}};
+    }
+    
+    .title{
+        font-family: Verdana, Tahoma, sans-serif;
+        font-weight: bold;
+        font-size: 58;
+        display: inline-block;
+        margin-right: 55%;
+        margin-left: 1.5%;
+        color: {{title_color}};
+    }
+
+    .titlediv{
+        padding-left: 2%;
+        padding-right: 2%;
+        width: 100%;
+
+    }
+    
+    .nav_a{
+        display: inline-block;
+        font-family: Verdana, Tahoma, sans-serif;
+        font-weight: bold;
+        font-size: 32;
+        border-radius: 50px;
+        border: 0;
+        padding: 5px 20px 5px;
+        margin-right: 1%;
+        color: white;
+        background-color: {{title_color}};
+    }
+
+    a:link { text-decoration: none; }
+    a:visited { text-decoration: none; }
+    a:hover { text-decoration: none; 
+                color: {{color}};}
+    
+    .formcontainer{
+        width: 40%;
+        margin-left: 30%;
+        padding-bottom: 15px;
+        
+    }
+    
+    input{
+        padding: 20px 50px 20px;
+        font-size: 24px;
+        display: inline-block;
+        margin: 0 auto;
+        width: 100%;
+        border: solid 1px;
+        margin-bottom: 35px;
+        border-radius: 50px;
+        color: {{title_color}};
+        background-color: white;
+        border-color: {{title_color}};
+    }
+    
+    ::placeholder{
+        color: {{title_color}};
+    }
+    button{
+        font-family: Verdana, Tahoma, sans-serif;
+        font-weight: bold;
+        font-size: 35px;
+        border-radius: 50px;
+        border: 0;
+        padding: 10px 25px 10px;
+        display: inline-block;
+        color: {{color}};
+        background-color: {{title_color}};
+    }
+    button:hover { text-decoration: none; 
+                color: white;}
+
+    p{
+        font-family: Verdana, Tahoma, sans-serif;
+        font-size: 23px;
+        font-weight: normal;
+        text-align: none;
+        margin-bottom: 35px;
+        margin-left: 35px;
+        display: inline-block;
+        color: {{title_color}};
+    }
+
+    .another{
+        color: aqua;
+    }
+</style>
+
+
+<body class="body">
+        <div class="titlediv">
+                <h1 class="title">TurQuiz</h1>
+                <a href="{{ url_for('dash') }}" class="nav_a">Dashboard</a>
+                <a href="{{ url_for('logout') }}" class="nav_a">Logout</a>
+        </div>
+        <div class="formcontainer">
+            <form method="POST" action="/new">
+                {{ form.hidden_tag() }}
+                {{ form.subject }}
+                <p>I want this quiz to be private:</p>{{form.private }}
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+</body>
