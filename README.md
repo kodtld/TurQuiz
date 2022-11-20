@@ -28,6 +28,5 @@ Sovelluksen ominaisuuksia ovat:
 
 * Koodi on vielä tässä vaiheessa sotkuista, ja esim. app.py tiedostoa ei ole hajautettu erillisiin moduuleihin.
 * SQL komennot on tällä hetkellä db.Model queryillä, eikä puhtailla SQL komennoilla.
-* Template tiedostoissa on suuri määrä copypastea <style> tägien sisällä.
+* Template tiedostoissa on suuri määrä copypastea <style/> tägien sisällä.
 * Kurssin fly.io ongelmista johtuen sovellus ei ole vielä testattavissa tuotannossa.
-
