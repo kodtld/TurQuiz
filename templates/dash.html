@@ -20,7 +20,7 @@
         padding-left: 2%;
         padding-right: 2%;
         width: 100%;
-        margin-bottom: 6%;
+        margin-bottom: 2%;
 
     }
     
@@ -82,7 +82,7 @@
     .community_quiz{
         width: 40%;
         display: inline-block;
-        padding: 20px 40px 50px;
+        padding: 120px 40px 150px;
         border-radius: 50px;
         background-color: rgba(255, 255, 255, 0.3);
         border-right: 4px solid {{title_color}};
@@ -93,7 +93,7 @@
         width: 40%;
         margin-left: 7.5%;
         display: inline-block;
-        padding: 20px 40px 50px;        
+        padding: 120px 40px 150px;        
         border-radius: 50px;
         background-color: rgba(255, 255, 255, 0.3);
         border-right: 4px solid {{title_color}};
@@ -104,6 +104,7 @@
         font-family: Verdana, Tahoma, sans-serif;
         font-size: 25px;
         font-weight: normal;
+        margin-bottom: 7.5%;
         text-align: center;
         color: {{title_color}};
     }
@@ -127,7 +128,7 @@
 <body class="body">
         <div class="titlediv">
                 <h1 class="title">TurQuiz</h1>
-                <a href="{{ url_for('new') }}" class="nav_a">Create Quiz</a>
+                <a href="{{ url_for('new') }}" class="nav_a">Create a Quiz</a>
                 <a href="{{ url_for('logout') }}" class="nav_a">Logout</a>
                 <p class="logged_p">Logged in as: {{username}}</p>
         </div>
@@ -139,7 +140,7 @@
                     Quizzes created by the community. <br>
                     Compete against other users, make high-scores and learn new knowledge!
                 </p>
-                <a href="" class="quiz_a">Take me there!</a>
+                <a href="{{ url_for('community_quizzes') }}" class="quiz_a">Take me there!</a>
             </div>
             <div class="your_quiz">
                 <h2>Your Quizzes</h2>
@@ -147,7 +148,7 @@
                     Quizzes created by you. <br>
                     Make new quizzes for the community, or show off to your friends!
                 </p>
-                <a href="" class="quiz_a">Take me there!</a>
+                <a href="{{ url_for('my_quizzes') }}" class="quiz_a">Take me there!</a>
             </div>
         </div>
 </body>

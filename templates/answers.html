@@ -1,5 +1,4 @@
 <style>
-
     .body{
         overflow-x: hidden;
         width: 100%; 
@@ -123,11 +122,11 @@
             <h3>Create a new quiz on any topic you'd like: </h3>
         </div>
         <div class="formcontainer">
-            <form method="POST" action="/new">
-                {{ form.hidden_tag() }}
-                {{ form.subject }}
-                <p>Mark the checkbox below, if you want this quiz to be private:</p>
-                {{form.private }}
+            <form method="POST" action="/{{subject}}/{{subject_id}}/answer">
+                {% for i in form %}
+                <li>{{i}}</li>
+                    
+                {% endfor %}
                 <button type="submit">Save / Add questions</button>
             </form>
         </div>

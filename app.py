@@ -7,6 +7,7 @@ from forms.loginform import LoginForm
 from forms.registerform import RegisterForm
 from forms.create_quiz import QuizForm
 from forms.create_questions import QuestionForm
+from forms.answerform import AnswerForm
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -134,3 +135,37 @@ def questions(subject,subject_id):
                 return redirect(url_for('questions', subject=subject, subject_id=subject_id))
 
         return render_template('questions.html', color = color.code, title_color = title_color.code, form = form, subject=subject, subject_id = subject_id)
+
+@app.route('/<subject>/<subject_id>/answer', methods=['GET', 'POST'])
+@login_required
+def answer(subject, subject_id):
+        color = choice(colors)
+        title_color = title_colors[0]
+
+        questions = Questions.query.filter_by(quiz_id=subject_id)
+
+        form = AnswerForm(questions)
+        print(form.rigth_answers)
+        print(form.new_questions)
+
+        return render_template('answers.html', color = color.code, title_color = title_color.code, form = form.new_questions, subject = subject, subject_id = subject_id)
+
+@app.route('/my_quizzes')
+@login_required
+def my_quizzes():
+        color = choice(colors)
+        title_color = title_colors[0]
+
+        quizzes = Quizs.query.filter_by(creator_id=current_user.id).order_by(-Quizs.id)
+        return render_template('my_quizzes.html', color = color.code, title_color = title_color.code, quizzes = quizzes)
+
+
+@app.route('/community_quizzes')
+@login_required
+def community_quizzes():
+        color = choice(colors)
+        title_color = title_colors[0]
+
+        quizzes = Quizs.query.filter_by(private="f").order_by(-Quizs.id)
+        return render_template('community_quizzes.html', color = color.code, title_color = title_color.code, quizzes = quizzes)
+
