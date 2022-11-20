@@ -23,10 +23,10 @@ Sovelluksen ominaisuuksia ovat:
 
 ### Seuraavat kehitysaskeleet:
 * Visoihin ei pysty vielä vastaamaan, niitä voi ainoastaan luoda.
-* Luotuja visoja ei pysty muokkaamaan, eikä poistamaan.
+* Luotuja visoja ei pysty muokkaamaan eikä poistamaan.
 * Visoja ei pysty filtteröidä hakusanalla.
 
-* Koodi on vielä tässä vaiheessa sotkuista, ja esim. app.py tiedostoa ei ole hajautettu erillisiin moduuleihin.
+* Koodi on vielä tässä vaiheessa sotkuista ja esim. app.py tiedostoa ei ole hajautettu erillisiin moduuleihin.
 * SQL komennot on tällä hetkellä db.Model queryillä, eikä puhtailla SQL komennoilla.
 * Template tiedostoissa on suuri määrä copypastea <style/> tägien sisällä.
 * Kurssin fly.io ongelmista johtuen sovellus ei ole vielä testattavissa tuotannossa.
