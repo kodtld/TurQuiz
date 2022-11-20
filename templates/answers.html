@@ -119,7 +119,7 @@
                 <a href="{{ url_for('logout') }}" class="nav_a">Logout</a>
         </div>
         <div class="textholder">
-            <h3>Create a new quiz on any topic you'd like: </h3>
+            <h3>Answer the questions below: </h3>
         </div>
         <div class="formcontainer">
             <form method="POST" action="/{{subject}}/{{subject_id}}/answer">
@@ -127,7 +127,6 @@
                 <li>{{i}}</li>
                     
                 {% endfor %}
-                <button type="submit">Save / Add questions</button>
             </form>
         </div>
 
