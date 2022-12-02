@@ -2,15 +2,22 @@ from app import app
 from db import db, Users, Quizs, Questions
 from flask_login import login_user, login_required, logout_user, current_user
 from flask import render_template, redirect, session, request, url_for
-from random import choice
+
+from random import choice, shuffle
+
 from models.color import colors, title_colors
 from models.quote import quotes
+
 from forms.loginform import LoginForm
 from forms.registerform import RegisterForm
 from forms.create_quiz import QuizForm
 from forms.create_questions import QuestionForm
 from forms.answerform import AnswerForm
+
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.datastructures import ImmutableMultiDict
+
+from compare_answers import compare_answers
 
 @app.route("/")
 def index():
@@ -108,11 +115,21 @@ def answer(subject, subject_id):
         color = choice(colors)
         title_color = title_colors[0]
 
+        checknumber = 0
+        
         questions = Questions.query.filter_by(quiz_id=subject_id)
-
         form = AnswerForm(questions)
-        print(form.rigth_answers)
-        print(form.new_questions)
+        right_answers = form.rigth_answers
+        
+        
+        for question in form.new_questions:
+                shuffle(question[1])
+
+                if request.method == 'POST' and checknumber == 0:
+                        checknumber +=1
+                        score = compare_answers(right_answers, request.values)
+                        print(score, "%")
+                
 
         return render_template('answers.html', color = color.code, title_color = title_color.code, form = form.new_questions, subject = subject, subject_id = subject_id)
 
