@@ -1,7 +1,7 @@
 from app import app
 from db import db, Users, Quizs, Questions
 from flask_login import login_user, login_required, logout_user, current_user
-from flask import render_template, redirect, session, request, url_for
+from flask import render_template, redirect, session, request, url_for, flash
 
 from random import choice, shuffle
 
@@ -38,7 +38,8 @@ def register():
                 new_user = Users(username=form.username.data, email=form.email.data,password=hashed_password)
                 db.session.add(new_user)
                 db.session.commit()
-                return '<h1>New user created!</h1>'
+                flash("User created succesfully")
+
         return render_template('register.html', color = color.code, title_color = title_color.code, form=form)
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -53,7 +54,7 @@ def login():
                         if check_password_hash(user.password, form.password.data):
                                 login_user(user, remember=True)
                                 return redirect(url_for('dash'))
-                return '<h1>Invalid credentials :(</h1>'
+                flash("Invalid username or password")
         return render_template('login.html', color = color.code, title_color = title_color.code, form = form)
 
 @app.route('/logout')

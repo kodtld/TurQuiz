@@ -1,6 +1,5 @@
-from flask import request
 def compare_answers(right_answers,user_answers):
-    imd = request.values
+    imd = user_answers
     score = imd.to_dict(flat=False)
     user_answer_values = [i[0] for i in score.values()]
     right_answer_values = [i[1] for i in right_answers]

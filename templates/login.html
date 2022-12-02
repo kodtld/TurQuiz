@@ -140,6 +140,9 @@
                 <a href="{{ url_for('index') }}">Home</a>
                 <a href="{{ url_for('register') }}">Register</a> 
         </div>
+        {% for message in get_flashed_messages() %}
+            {{message}}
+        {% endfor %}
         <div class="formcontainer">
             <div class="regtitle">
                 <h3>Log in to your account</h3>
