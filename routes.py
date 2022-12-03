@@ -15,9 +15,11 @@ from forms.create_questions import QuestionForm
 from forms.answerform import AnswerForm
 
 from werkzeug.security import generate_password_hash, check_password_hash
-from werkzeug.datastructures import ImmutableMultiDict
+
 
 from compare_answers import compare_answers
+
+from threads import add_user, add_quiz, get_created_quiz, add_question, get_questions, get_user_quizzes, get_community_quizzes
 
 @app.route("/")
 def index():
@@ -35,9 +37,7 @@ def register():
         form = RegisterForm()
         if form.validate_on_submit():
                 hashed_password = generate_password_hash(form.password.data, method='sha256')
-                new_user = Users(username=form.username.data, email=form.email.data,password=hashed_password)
-                db.session.add(new_user)
-                db.session.commit()
+                add_user(form.username.data,form.email.data,hashed_password)
                 flash("User created succesfully")
 
         return render_template('register.html', color = color.code, title_color = title_color.code, form=form)
@@ -79,10 +79,8 @@ def new():
         
         form = QuizForm()
         if form.validate_on_submit():
-                new_quiz = Quizs(subject=form.subject.data,private=form.private.data,creator_id=current_user.id)
-                db.session.add(new_quiz)
-                db.session.commit()
-                created_quiz = Quizs.query.filter_by(subject=form.subject.data).first()
+                add_quiz(form.subject.data, form.private.data, current_user.id)
+                created_quiz = get_created_quiz(form.subject.data)
 
                 return redirect(url_for('questions', subject=form.subject.data, subject_id=created_quiz.id))
         return render_template('new.html', color = color.code, title_color = title_color.code, form = form)
@@ -96,16 +94,7 @@ def questions(subject,subject_id):
         form = QuestionForm()
 
         if form.validate_on_submit():
-                new_question = Questions(
-                        question = form.question_1.data,
-                        answer = form.q1_answer.data,
-                        option_1 = form.q1_option_1.data,
-                        option_2 = form.q1_option_2.data,
-                        option_3 = form.q1_option_3.data,
-                        quiz_id = subject_id
-                )
-                db.session.add(new_question)
-                db.session.commit()
+                add_question(form.question_1.data, form.q1_answer.data, form.q1_option_1.data, form.q1_option_2.data, form.q1_option_3.data, subject_id)
                 return redirect(url_for('questions', subject=subject, subject_id=subject_id))
 
         return render_template('questions.html', color = color.code, title_color = title_color.code, form = form, subject=subject, subject_id = subject_id)
@@ -118,10 +107,9 @@ def answer(subject, subject_id):
 
         checknumber = 0
         
-        questions = Questions.query.filter_by(quiz_id=subject_id)
+        questions = get_questions(subject_id)
         form = AnswerForm(questions)
         right_answers = form.rigth_answers
-        
         
         for question in form.new_questions:
                 shuffle(question[1])
@@ -140,7 +128,7 @@ def my_quizzes():
         color = choice(colors)
         title_color = title_colors[0]
 
-        quizzes = Quizs.query.filter_by(creator_id=current_user.id).order_by(-Quizs.id)
+        quizzes = get_user_quizzes(current_user.id)
         return render_template('my_quizzes.html', color = color.code, title_color = title_color.code, quizzes = quizzes)
 
 
@@ -150,5 +138,5 @@ def community_quizzes():
         color = choice(colors)
         title_color = title_colors[0]
 
-        quizzes = Quizs.query.filter_by(private="f").order_by(-Quizs.id)
+        quizzes = get_community_quizzes()
         return render_template('community_quizzes.html', color = color.code, title_color = title_color.code, quizzes = quizzes)
