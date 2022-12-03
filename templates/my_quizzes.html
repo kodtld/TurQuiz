@@ -49,7 +49,7 @@
 
     .quiz_a{
         padding: 30px;
-        width: 50%;
+        width: 30%;
     }
 
     h3{
@@ -89,6 +89,6 @@
             <p>Sorted by latest</p>
         </div>
         {% for i in quizzes %}
-        <li><a class="quiz_a" href="/{{i.subject}}/{{i['id']}}/answer">{{i.subject}}</a></li>
+        <li><a class="quiz_a" href="/{{i.subject}}/{{i['id']}}/answer">{{i.subject}}</a><a href="/{{i['id']}}/delete">Delete Quiz</a></li>
         {% endfor %}
 </body>

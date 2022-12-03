@@ -19,7 +19,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from compare_answers import compare_answers
 
-from threads import add_user, add_quiz, get_created_quiz, add_question, get_questions, get_user_quizzes, get_community_quizzes
+from threads import add_user, add_quiz, get_created_quiz, add_question, get_questions, get_user_quizzes, get_community_quizzes, delete_quiz
 
 @app.route("/")
 def index():
@@ -140,3 +140,10 @@ def community_quizzes():
 
         quizzes = get_community_quizzes()
         return render_template('community_quizzes.html', color = color.code, title_color = title_color.code, quizzes = quizzes)
+
+@app.route('/<subject_id>/delete', methods=['GET'])
+@login_required
+def delete(subject_id):
+        delete_quiz(current_user.id,subject_id)
+        return redirect(url_for('my_quizzes'))
+
