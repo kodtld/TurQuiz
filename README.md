@@ -51,7 +51,7 @@ Sovelluksen ominaisuuksia ovat:
 ### Seuraavat kehitysaskeleet:
 * Luotuja visoja ei pysty muokkaamaan.
 * Visoja ei pysty filtteröidä hakusanalla.
-* App.py tiedostoa on viime palautuksesta siistitty ja hajautettu, mutta sovellus kaipaa vielä pientä refaktorointia siellä sun täällä.
+* App.py tiedostoa on viime palautuksesta siistitty ja hajautettu, mutta sovellus kaipaa vielä "pientä" refaktorointia siellä sun täällä.
 * Template tiedostoissa on suuri määrä copypastea <style/> tägien sisällä.
 * Sovelluksen visuaalinen ilme on monilta osin epäselvä (käyttäjälle ei kerrota onnistuneista tai epäonnistuneista operaatioista yms.) ja UI on osittain täysin laiminlyöty.
 * Sovellus sisältää vielä bugeja ja sen voi halutessaan saada kaatumaan.
