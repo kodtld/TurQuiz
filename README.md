@@ -41,7 +41,7 @@ Sovelluksen ominaisuuksia ovat:
 * Käyttäjä voi vastata joko yhteisön julkisiin, tai itse luomiinsa visoihin.
 * Käyttäjä pystyy poistamaam luomansa visan "My Quizzes" sivulta.
 * App.config on siirretty .env tiedostoon ja SECRET_KEY on muutettu.
-* SQL db.Model queryt ovat muutettu puhtaiksi SQL komennoiksi.
+* db.Model queryt ovat muutettu puhtaiksi SQL komennoiksi.
 ### Seuraavat kehitysaskeleet:
 * Luotuja visoja ei pysty muokkaamaan.
 * Visoja ei pysty filtteröidä hakusanalla.
