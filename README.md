@@ -30,3 +30,32 @@ Sovelluksen ominaisuuksia ovat:
 * SQL komennot on tällä hetkellä db.Model queryillä, eikä puhtailla SQL komennoilla.
 * Template tiedostoissa on suuri määrä copypastea <style/> tägien sisällä.
 * Kurssin fly.io ongelmista johtuen sovellus ei ole vielä testattavissa tuotannossa.
+
+## Välipalautus 3. (04.12)
+
+### Sovelluksen nykytila:
+* Käyttäjä voi kirjautua sisään ja ulos, sekä luoda uuden tunnuksen.
+* Käyttäjä näkee kaksi erillistä listaa: omat visat ja julkiset visat.
+* Käyttäjän on mahdollista luoda omia visoja, jotka hän voi asettaa joko julkiseksi tai yksityiseksi.
+    * Visaa luodessa käyttäjä antaa aihepiirin ja valitsemansa määrän kysymyksiä joissa on neljä vastausvaihtoehtoa.
+* Käyttäjä voi vastata joko yhteisön julkisiin, tai itse luomiinsa visoihin.
+* Käyttäjä pystyy poistamaam luomansa visan "My Quizzes" sivulta.
+* App.config on siirretty .env tiedostoon ja SECRET_KEY on muutettu.
+* SQL db.Model queryt ovat muutettu puhtaiksi SQL komennoiksi.
+### Seuraavat kehitysaskeleet:
+* Luotuja visoja ei pysty muokkaamaan.
+* Visoja ei pysty filtteröidä hakusanalla.
+* App.py tiedostoa on viime palautuksesta siistitty ja hajautettu, mutta sovellus kaipaa vielä pientä refaktorointia siellä sun täällä.
+* Template tiedostoissa on suuri määrä copypastea <style/> tägien sisällä.
+* Ainoa SQL komento joka on edelleen db.Model query muodossa on kirjautuvan käyttäjän tietojen hakeminen, sillä flask_loginin kaipaama "is_active" kenttä aiheutti ongelmia.
+* Kurssin fly.io ongelmista johtuen sovellus ei ole vielä testattavissa tuotannossa.
+
+
+
+
+
+
+
+
+
+
