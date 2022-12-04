@@ -3,7 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from os import getenv
 from flask_login import LoginManager, UserMixin
 
-app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL")
+app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL")#.replace("://", "ql://", 1)
+
 db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -34,6 +35,7 @@ class Highscores(db.Model):
         id = db.Column(db.Integer, primary_key=True)
         quiz_id = db.Column(db.Integer)
         user_id = db.Column(db.Integer)
+        score = db.Column(db.Integer)
 
 @login_manager.user_loader
 def load_user(user_id):

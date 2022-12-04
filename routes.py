@@ -19,7 +19,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from compare_answers import compare_answers
 
-from threads import add_user, add_quiz, get_created_quiz, add_question, get_questions, get_user_quizzes, get_community_quizzes, delete_quiz
+from threads import add_user, add_quiz, get_created_quiz, add_question, get_questions, get_user_quizzes, get_community_quizzes, delete_quiz, save_highscore, get_highscores
 
 @app.route("/")
 def index():
@@ -129,6 +129,8 @@ def myscore(subject, subject_id, score):
         color = choice(colors)
         title_color = title_colors[0]
 
+        save_highscore(subject_id, current_user.id, score)
+
         return render_template('score.html', color = color.code, title_color = title_color.code, subject = subject, score = score)
 
 @app.route('/my_quizzes')
@@ -140,7 +142,6 @@ def my_quizzes():
         quizzes = get_user_quizzes(current_user.id)
         return render_template('my_quizzes.html', color = color.code, title_color = title_color.code, quizzes = quizzes)
 
-
 @app.route('/community_quizzes')
 @login_required
 def community_quizzes():
@@ -148,7 +149,18 @@ def community_quizzes():
         title_color = title_colors[0]
 
         quizzes = get_community_quizzes()
+        print(quizzes)
         return render_template('community_quizzes.html', color = color.code, title_color = title_color.code, quizzes = quizzes)
+
+@app.route('/my_scores')
+@login_required
+def my_scores():
+        color = choice(colors)
+        title_color = title_colors[0]
+
+        quiz_and_score = get_highscores(current_user.id)
+        return render_template('my_scores.html', color = color.code, title_color = title_color.code, quiz_and_score = quiz_and_score)
+
 
 @app.route('/<subject_id>/delete', methods=['GET'])
 @login_required

@@ -33,6 +33,9 @@ Sovelluksen ominaisuuksia ovat:
 
 ## Välipalautus 3. (04.12)
 
+### Sovellus testattavissa
+* Sovellusta voi testata osoitteessa: https://turquiz.fly.dev
+
 ### Sovelluksen nykytila:
 * Käyttäjä voi kirjautua sisään ja ulos, sekä luoda uuden tunnuksen.
 * Käyttäjä näkee kaksi erillistä listaa: omat visat ja julkiset visat.
@@ -42,13 +45,15 @@ Sovelluksen ominaisuuksia ovat:
 * Käyttäjä pystyy poistamaam luomansa visan "My Quizzes" sivulta.
 * App.config on siirretty .env tiedostoon ja SECRET_KEY on muutettu.
 * db.Model queryt ovat muutettu puhtaiksi SQL komennoiksi.
+
 ### Seuraavat kehitysaskeleet:
 * Luotuja visoja ei pysty muokkaamaan.
 * Visoja ei pysty filtteröidä hakusanalla.
 * App.py tiedostoa on viime palautuksesta siistitty ja hajautettu, mutta sovellus kaipaa vielä pientä refaktorointia siellä sun täällä.
 * Template tiedostoissa on suuri määrä copypastea <style/> tägien sisällä.
-* Ainoa SQL komento joka on edelleen db.Model query muodossa on kirjautuvan käyttäjän tietojen hakeminen, sillä flask_loginin kaipaama "is_active" kenttä aiheutti ongelmia.
-* Kurssin fly.io ongelmista johtuen sovellus ei ole vielä testattavissa tuotannossa.
+* Sovelluksen visuaalinen ilme on monilta osin epäselvä (käyttäjälle ei kerrota onnistuneista tai epäonnistuneista operaatioista yms.) ja UI on osittain täysin laiminlyöty.
+* Sovellus sisältää vielä bugeja ja sen voi halutessaan saada kaatumaan.
+* Suurimmat toiminnalliset operaatiot ovat toteutettu, ja loppuaika käytetään UI:n kehittämiseen, bugien korjaamiseen, sekä koodin refaktorointiin.
 
 
 
