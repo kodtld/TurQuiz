@@ -35,7 +35,9 @@ Sovelluksen ominaisuuksia ovat:
 
 ### Sovellus testattavissa
 * Sovellusta voi testata osoitteessa: https://turquiz.fly.dev
-    * Voit käyttää tunnuksia: username: testikayttaja password: testitesti123, tai luoda omat tunnukset :)
+    * Voit käyttää tunnuksia:
+      USERNAME: testikayttaja | PASSWORD: testitesti123
+      , tai luoda omat tunnukset :)
 ### Sovelluksen nykytila:
 * Käyttäjä voi kirjautua sisään ja ulos, sekä luoda uuden tunnuksen.
 * Käyttäjä näkee kaksi erillistä listaa: omat visat ja julkiset visat.
