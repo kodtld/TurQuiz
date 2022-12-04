@@ -44,7 +44,9 @@ Sovelluksen ominaisuuksia ovat:
 * Käyttäjän on mahdollista luoda omia visoja, jotka hän voi asettaa joko julkiseksi tai yksityiseksi.
     * Visaa luodessa käyttäjä antaa aihepiirin ja valitsemansa määrän kysymyksiä joissa on neljä vastausvaihtoehtoa.
 * Käyttäjä voi vastata joko yhteisön julkisiin, tai itse luomiinsa visoihin.
-* Käyttäjä pystyy poistamaam luomansa visan "My Quizzes" sivulta.
+* Kun käyttäjä on vastannut visaan, näytetään hänelle saamansa pisteet.
+* Käyttäjä voi tarkastella kaikkien vastaamiensa JULKISTEN visojen saatuja pisteitä "My Scores" osiossa.
+* Käyttäjä pystyy poistamaan luomansa visan "My Quizzes" sivulta.
 * App.config on siirretty .env tiedostoon ja SECRET_KEY on muutettu.
 * db.Model queryt ovat muutettu puhtaiksi SQL komennoiksi.
 
