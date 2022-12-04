@@ -33,7 +33,7 @@ Sovelluksen ominaisuuksia ovat:
 
 ## Välipalautus 3. (04.12)
 
-### Sovellus testattavissa
+### Sovellus testattavissa:
 * Sovellusta voi testata osoitteessa: https://turquiz.fly.dev
     * Voit käyttää tunnuksia:
       USERNAME: testikayttaja | PASSWORD: testitesti123
