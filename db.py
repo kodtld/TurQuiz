@@ -30,6 +30,11 @@ class Questions(db.Model):
         option_3 = db.Column(db.String(50))
         quiz_id = db.Column(db.Integer)
 
+class Highscores(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        quiz_id = db.Column(db.Integer)
+        user_id = db.Column(db.Integer)
+
 @login_manager.user_loader
 def load_user(user_id):
         return Users.query.get(int(user_id))

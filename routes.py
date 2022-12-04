@@ -105,8 +105,7 @@ def answer(subject, subject_id):
         color = choice(colors)
         title_color = title_colors[0]
 
-        checknumber = 0
-        
+        checknumber = 0        
         questions = get_questions(subject_id)
         form = AnswerForm(questions)
         right_answers = form.rigth_answers
@@ -117,10 +116,20 @@ def answer(subject, subject_id):
                 if request.method == 'POST' and checknumber == 0:
                         checknumber +=1
                         score = compare_answers(right_answers, request.values)
-                        print(score, "%")
+                        score = (int(score) * 777)
+                        return redirect(url_for('myscore', subject=subject, subject_id=subject_id, score=score))
                 
 
         return render_template('answers.html', color = color.code, title_color = title_color.code, form = form.new_questions, subject = subject, subject_id = subject_id)
+
+@app.route('/<subject>/<subject_id>/<score>/myscore')
+@login_required
+def myscore(subject, subject_id, score):
+        score = (int(score) / 777)
+        color = choice(colors)
+        title_color = title_colors[0]
+
+        return render_template('score.html', color = color.code, title_color = title_color.code, subject = subject, score = score)
 
 @app.route('/my_quizzes')
 @login_required
