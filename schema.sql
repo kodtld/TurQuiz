@@ -28,3 +28,16 @@ CREATE TABLE Highscores(
     user_id INTEGER,
     score INTEGER
 );
+
+CREATE TABLE Answerank(
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER,
+    amount INTEGER,
+    level TEXT
+);
+
+CREATE TABLE Createrank(
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER,
+    level TEXT
+);

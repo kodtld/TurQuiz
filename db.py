@@ -37,6 +37,18 @@ class Highscores(db.Model):
         user_id = db.Column(db.Integer)
         score = db.Column(db.Integer)
 
+class Answerank(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer)
+        amount = db.Column(db.Integer)
+        level = db.Column(db.String(50))
+
+class Createrank(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer)
+        level = db.Column(db.String(50))
+
+
 @login_manager.user_loader
 def load_user(user_id):
         return Users.query.get(int(user_id))

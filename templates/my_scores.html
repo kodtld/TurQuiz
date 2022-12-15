@@ -71,7 +71,7 @@
         font-weight: normal;
         font-size: 26;
         text-align: center;
-        margin-bottom: 2%;
+        font-weight: bold;
         color: {{title_color}};
     }
     .textholder{
@@ -83,6 +83,39 @@
     .score_p{
         margin-bottom: 0%;
     }
+    .ranks{
+        width: 60%;
+        margin-left: 20%;
+        margin-bottom: 2%;
+
+    }
+    .rankholder{
+        width: 42.5%;
+        padding: 10px;
+        margin-left: 4%;
+        border-radius: 50px;
+        display: inline-block;
+    }
+    .ans_rankcolor{
+        border-radius: 50px;
+        height: 10%;
+        padding: 5px;
+        border: 5px dashed {{answer_rankcolor_code}};
+
+    }
+    .cr_rankcolor{
+        border-radius: 50px;
+        height: 10%;
+        padding: 5px;
+        border: 5px dashed {{create_rankcolor_code}};
+
+    }
+    .ans_rankp{
+        color: {{answer_rankcolor_code}};
+    }
+    .cr_rankp{
+        color: {{create_rankcolor_code}};
+    }
 </style>
 
 <body class="body">
@@ -92,14 +125,28 @@
                 <a href="{{ url_for('new') }}">Create a Quiz</a>
                 <a href="{{ url_for('logout') }}">Logout</a>
         </div>
+        <div class="ranks">
+            <div class="rankholder">
+                <p>Your Answer rank:</p>
+                <div class="ans_rankcolor"><p class="ans_rankp">{{ranks[1]}}</p></div>
+                <p>You've answered a quiz {{ranks[0]}} times!</p>
+            </div>
+            
+            <div class="rankholder">
+                <p>Your Creator rank:</p>
+                <div class="cr_rankcolor"><p class="cr_rankp">{{ranks[3]}}</p></div>
+                <p>You've created {{ranks[2]}} quizzes!</p>
+            </div>
+        </div>  
+
         <div class="textholder">
-            <h3>Community quizzes by topic: </h3>
-            <p>Sorted by latest</p>
+            <h3>Your personal highscores: </h3>
+            <p></p>
         </div>        
         {% for i in quiz_and_score %}
         <li><a class="quiz_a" href="/{{i.subject}}/{{i['id']}}/answer">{{i.subject}}</a><p class="score_p">Your high-score: {{i.score}}%</p></li>
         {% endfor %}
         {% if  quiz_and_score|length < 1 %} 
-            <h3>No answers :(</h3>
+            <h3>No community quizzes played</h3>
         {% endif %}
 </body>

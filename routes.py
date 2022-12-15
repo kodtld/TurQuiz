@@ -16,10 +16,11 @@ from forms.answerform import AnswerForm
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
+from rank import get_rankcolor, get_ranks
 
 from compare_answers import compare_answers
 
-from threads import add_user, add_quiz, get_created_quiz, add_question, get_questions, get_user_quizzes, get_community_quizzes, delete_quiz, save_highscore, get_highscores
+from threads import add_user, add_quiz, get_created_quiz, get_user ,add_answerank,add_createrank,add_question, get_questions, get_user_quizzes, get_community_quizzes, delete_quiz, save_highscore, get_highscores
 
 @app.route("/")
 def index():
@@ -38,6 +39,10 @@ def register():
         if form.validate_on_submit():
                 hashed_password = generate_password_hash(form.password.data, method='sha256')
                 add_user(form.username.data,form.email.data,hashed_password)
+                created_user = get_user(form.username.data)
+                add_answerank(created_user.id)
+                add_createrank(created_user.id)
+                
                 flash("User created succesfully")
 
         return render_template('register.html', color = color.code, title_color = title_color.code, form=form)
@@ -81,7 +86,7 @@ def new():
         if form.validate_on_submit():
                 add_quiz(form.subject.data, form.private.data, current_user.id)
                 created_quiz = get_created_quiz(form.subject.data)
-
+                
                 return redirect(url_for('questions', subject=form.subject.data, subject_id=created_quiz.id))
         return render_template('new.html', color = color.code, title_color = title_color.code, form = form)
 
@@ -159,7 +164,15 @@ def my_scores():
         title_color = title_colors[0]
 
         quiz_and_score = get_highscores(current_user.id)
-        return render_template('my_scores.html', color = color.code, title_color = title_color.code, quiz_and_score = quiz_and_score)
+        ranks = get_ranks(current_user.id)
+        
+        
+        answer_rankcolor_code = get_rankcolor(ranks[1])
+        create_rankcolor_code = get_rankcolor(ranks[3])
+        
+        return render_template('my_scores.html', color = color.code, title_color = title_color.code, 
+                quiz_and_score = quiz_and_score, answer_rankcolor_code = answer_rankcolor_code.code, 
+                create_rankcolor_code = create_rankcolor_code.code, ranks = ranks)
 
 
 @app.route('/<subject_id>/delete', methods=['GET'])
