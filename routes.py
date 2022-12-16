@@ -139,7 +139,8 @@ def answer(subject, subject_id):
                                         score = (int(score) * 777)
                                         update_answerank_amount(current_user.id)
                                         return redirect(url_for('myscore', subject=subject, subject_id=subject_id, score=score))
-                                else:
+                                else:   
+                                        checknumber +=1
                                         flash("Please answer all the questions!")
                 
 
