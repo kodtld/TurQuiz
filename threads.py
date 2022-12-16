@@ -53,6 +53,11 @@ def delete_quiz(user_id,quiz_id):
         db.session.execute(sql,{"quiz_id":quiz_id, "id":quiz_id})
         db.session.commit()
 
+def delete_empty_quiz(quiz_id):
+    sql = ("DELETE FROM Quizs WHERE id=:quiz_id")
+    db.session.execute(sql,{"quiz_id":quiz_id})
+    db.session.commit()
+
 def save_highscore(quiz_id, user_id, score):
     current_high = ("SELECT Score FROM highscores WHERE quiz_id=:quiz_id AND user_id=:user_id")
 

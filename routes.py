@@ -20,7 +20,7 @@ from rank import get_rankcolor, get_ranks
 
 from compare_answers import compare_answers
 
-from threads import add_user, add_quiz, get_created_quiz, get_user ,add_answerank,add_createrank,add_question, update_answerank_amount,get_questions, get_user_quizzes, get_community_quizzes, delete_quiz, save_highscore, get_highscores
+from threads import add_user, add_quiz, get_created_quiz, get_user ,add_answerank,add_createrank,add_question, delete_empty_quiz,update_answerank_amount,get_questions, get_user_quizzes, get_community_quizzes, delete_quiz, save_highscore, get_highscores
 
 @app.route("/")
 def index():
@@ -37,13 +37,18 @@ def register():
         
         form = RegisterForm()
         if form.validate_on_submit():
-                hashed_password = generate_password_hash(form.password.data, method='sha256')
-                add_user(form.username.data,form.email.data,hashed_password)
-                created_user = get_user(form.username.data)
-                add_answerank(created_user.id)
-                add_createrank(created_user.id)
-                
-                flash("User created succesfully")
+                try:
+                        hashed_password = generate_password_hash(form.password.data, method='sha256')
+                        add_user(form.username.data,form.email.data,hashed_password)
+                        created_user = get_user(form.username.data)
+                        add_answerank(created_user.id)
+                        add_createrank(created_user.id)        
+                        flash("User created succesfully!")
+
+                except:
+                        flash("Username or email already in use!")
+        if  request.method == "POST" and not form.validate_on_submit():
+                flash("Please enter valid values!")
 
         return render_template('register.html', color = color.code, title_color = title_color.code, form=form)
 
@@ -59,7 +64,7 @@ def login():
                         if check_password_hash(user.password, form.password.data):
                                 login_user(user, remember=True)
                                 return redirect(url_for('dash'))
-                flash("Invalid username or password")
+                flash("Invalid username or password!")
         return render_template('login.html', color = color.code, title_color = title_color.code, form = form)
 
 @app.route('/logout')
@@ -83,13 +88,18 @@ def new():
         title_color = title_colors[0]
         
         form = QuizForm()
-        if form.validate_on_submit():
-                add_quiz(form.subject.data, form.private.data, current_user.id)
-                created_quiz = get_created_quiz(form.subject.data)
-                
-                return redirect(url_for('questions', subject=form.subject.data, subject_id=created_quiz.id))
-        return render_template('new.html', color = color.code, title_color = title_color.code, form = form)
+        try:
+                if form.validate_on_submit():
+                        add_quiz(form.subject.data, form.private.data, current_user.id)
+                        created_quiz = get_created_quiz(form.subject.data)
+                        
+                        return redirect(url_for('questions', subject=form.subject.data, subject_id=created_quiz.id))
+        
+        except:
+                flash("A quiz by the same name already exists!")
 
+        return render_template('new.html', color = color.code, title_color = title_color.code, form = form)
+        
 @app.route('/<subject>/<subject_id>/questions', methods=['GET', 'POST'])
 @login_required
 def questions(subject,subject_id):
@@ -112,18 +122,25 @@ def answer(subject, subject_id):
 
         checknumber = 0        
         questions = get_questions(subject_id)
-        form = AnswerForm(questions)
-        right_answers = form.rigth_answers
-        
-        for question in form.new_questions:
-                shuffle(question[1])
+        if len(questions) == 0:
+                delete_empty_quiz(subject_id)
+                return render_template('empty.html', color = color.code, title_color = title_color.code)
+        else:
+                form = AnswerForm(questions)
+                right_answers = form.rigth_answers
+                
+                for question in form.new_questions:
+                        shuffle(question[1])
 
-                if request.method == 'POST' and checknumber == 0 and len(request.values) == len(right_answers):
-                        checknumber +=1
-                        score = compare_answers(right_answers, request.values)
-                        score = (int(score) * 777)
-                        update_answerank_amount(current_user.id)
-                        return redirect(url_for('myscore', subject=subject, subject_id=subject_id, score=score))
+                        if request.method == 'POST' and checknumber == 0:
+                                if len(request.values) == len(right_answers):
+                                        checknumber +=1
+                                        score = compare_answers(right_answers, request.values)
+                                        score = (int(score) * 777)
+                                        update_answerank_amount(current_user.id)
+                                        return redirect(url_for('myscore', subject=subject, subject_id=subject_id, score=score))
+                                else:
+                                        flash("Please answer all the questions!")
                 
 
         return render_template('answers.html', color = color.code, title_color = title_color.code, form = form.new_questions, subject = subject, subject_id = subject_id)
@@ -155,7 +172,6 @@ def community_quizzes():
         title_color = title_colors[0]
 
         quizzes = get_community_quizzes()
-        print(quizzes)
         return render_template('community_quizzes.html', color = color.code, title_color = title_color.code, quizzes = quizzes)
 
 @app.route('/my_scores')
@@ -166,9 +182,7 @@ def my_scores():
 
         quiz_and_score = get_highscores(current_user.id)
         ranks = get_ranks(current_user.id)
-        print("RAAAAAAAAAAAAAAAAAAANK")
-        print(ranks)
-        
+
         answer_rankcolor_code = get_rankcolor(ranks[1])
         create_rankcolor_code = get_rankcolor(ranks[3])
         
@@ -180,6 +194,7 @@ def my_scores():
 @app.route('/<subject_id>/delete', methods=['GET'])
 @login_required
 def delete(subject_id):
+        
         delete_quiz(current_user.id,subject_id)
         return redirect(url_for('my_quizzes'))
 

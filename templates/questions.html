@@ -113,50 +113,8 @@
                 {{ form.q1_option_2 }}
                 {{ form.q1_option_3 }}
             </div>
-            <!-- <div class="formcontainer">
-                {{ form.question_2 }} <br>
-                {{ form.q2_answer }}
-                {{ form.q2_option_1 }}
-                {{ form.q2_option_2 }}
-                {{ form.q2_option_3 }}
-            </div>
-            <div class="formcontainer">
-                {{ form.question_3 }} <br>
-                {{ form.q3_answer }}
-                {{ form.q3_option_1 }}
-                {{ form.q3_option_2 }}
-                {{ form.q3_option_3 }}
-            </div>
-            <div class="formcontainer">
-                {{ form.question_4 }} <br>
-                {{ form.q4_answer }}
-                {{ form.q4_option_1 }}
-                {{ form.q4_option_2 }}
-                {{ form.q4_option_3 }}
-            </div>
-            <div class="formcontainer">
-                {{ form.question_5 }} <br>
-                {{ form.q5_answer }}
-                {{ form.q5_option_1 }}
-                {{ form.q5_option_2 }}
-                {{ form.q5_option_3 }}
-            </div>
-            <div class="formcontainer">
-                {{ form.question_6 }} <br>
-                {{ form.q6_answer }}
-                {{ form.q6_option_1 }}
-                {{ form.q6_option_2 }}
-                {{ form.q6_option_3 }}
-            </div>
-            <div class="formcontainer">
-                {{ form.question_7 }} <br>
-                {{ form.q7_answer }}
-                {{ form.q7_option_1 }}
-                {{ form.q7_option_2 }}
-                {{ form.q7_option_3 }}
-            </div> -->
             <div class="btnbox">
-                <a href="{{ url_for('my_quizzes') }}">Done</a>
+                <a onclick="if (confirm('Are you sure you dont want to add anymore questions?')){return true;}else{event.stopPropagation(); event.preventDefault();};" href="{{ url_for('my_quizzes') }}">Done</a>
                 <button type="submit">Save / Add another</button>
             </div>
         </form>

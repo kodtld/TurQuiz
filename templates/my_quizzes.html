@@ -90,6 +90,6 @@
             <p>Sorted by latest</p>
         </div>
         {% for i in quizzes %}
-        <li><a class="quiz_a" href="/{{i.subject}}/{{i['id']}}/answer">{{i.subject}}</a><a href="/{{i['id']}}/delete">Delete Quiz</a></li>
+        <li><a class="quiz_a" href="/{{i.subject}}/{{i['id']}}/answer">{{i.subject}}</a><a onclick="if (confirm('Delete selected item?')){return true;}else{event.stopPropagation(); event.preventDefault();};" href="/{{i['id']}}/delete">Delete Quiz</a></li>
         {% endfor %}
 </body>
