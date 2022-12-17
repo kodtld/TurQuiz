@@ -4,25 +4,7 @@
         width: 100%; 
         background-color: {{color}};
     }
-    
-    .title{
-        border: 3px;
-        font-family: Verdana, Tahoma, sans-serif;
-        font-weight: bold;
-        font-size: 58;
-        display: inline-block;
-        margin-right: 60%;
-        margin-left: 1.5%;
-        color: {{title_color}};
-    }
 
-    .titlediv{
-        padding-left: 2%;
-        padding-right: 2%;
-        width: 100%;
-        margin-bottom: 7.5%;
-    }
-    
     a{
         display: inline-block;
         font-family: Verdana, Tahoma, sans-serif;
@@ -33,34 +15,26 @@
         padding: 5px 20px 5px;
         margin-right: 1%;
         color: {{color}};
-        background-color: {{title_color}};
+        background-color: #2A8D88;
     }
-
-    a:link { text-decoration: none; }
-    a:visited { text-decoration: none; }
-    a:hover { text-decoration: none; 
-                color: white;}
     
-    .quotediv{
-        width: 60%;
-        margin-left: 20%;
-        align-items: center;
-    }
-
-    .quote{
-        font-family: Verdana, Tahoma, sans-serif;
-        font-weight: bold;
-        font-size: 78;
-        text-align: center;
-        color: {{title_color}};
-    }
-
-    .author{
-        font-family: Verdana, Tahoma, sans-serif;
-        font-size: 28;
-        text-align: right;
-        color: {{title_color}};
-    }
+    a:hover,a:link,a:visited{text-decoration:none}
+    
+    .quote,.title{font-weight:700}
+    
+    .author,.quote,.title{font-family:Verdana,Tahoma,sans-serif;color:#2a8d88}
+    
+    .title{border:3px;font-size:58;display:inline-block;margin-right:60%;margin-left:1.5%}
+    
+    .titlediv{padding-left:2%;padding-right:2%;width:100%;margin-bottom:7.5%}
+    
+    a:hover{color:#fff}
+    
+    .quotediv{width:60%;margin-left:20%;align-items:center}
+    
+    .quote{font-size:78;text-align:center}
+    
+    .author{font-size:28;text-align:right}
 
 </style>
 
