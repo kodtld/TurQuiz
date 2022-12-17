@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from os import getenv
 from flask_login import LoginManager, UserMixin
 
-
 app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL") # FOR LOCAL USE
 #app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL").replace("://", "ql://", 1) # FOR DEPLOYMENT
 
