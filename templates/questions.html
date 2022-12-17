@@ -1,99 +1,18 @@
 <style>
-
-    .body{
-        overflow-x: hidden;
-        width: 100%; 
-        background-color: {{color}};
-    }
-    
-    .title{
-        font-family: Verdana, Tahoma, sans-serif;
-        font-weight: bold;
-        font-size: 58;
-        display: inline-block;
-        margin-right: 60%;
-        margin-left: 1.5%;
-        color: #2a8d88;
-    }
-
-    .titlediv{
-        padding-left: 2%;
-        padding-right: 2%;
-        width: 100%;
-
-    }
-    
-    .nav_a{
-        display: inline-block;
-        font-family: Verdana, Tahoma, sans-serif;
-        font-weight: bold;
-        font-size: 32;
-        border-radius: 50px;
-        border: 0;
-        padding: 5px 20px 5px;
-        margin-right: 1%;
-        color: white;
-        background-color: #2a8d88;
-    }
-
-    a:link { text-decoration: none; }
-    a:visited { text-decoration: none; }
-    a:hover { text-decoration: none; 
-                color: {{color}};}
-    
-    
-    .formcontainer{
-        width: 60%;
-        margin-left: 20%;
-        padding-top: 35px;
-        border-top: 2px solid #2a8d88;
-        
-    }
-    
-    input{
-        padding: 20px 50px 20px;
-        font-size: 20px;
-        display: inline-block;
-        margin: 0 auto;
-        width: 45%;
-        margin-left: 2.5%;
-        border: solid 1px;
-        margin-bottom: 35px;
-        border-radius: 50px;
-        color: #2a8d88;
-        background-color: white;
-        border-color: #2a8d88;
-    }
-    ::placeholder{
-        color: #2a8d88;
-    }
-
-
-    button, a{
-        font-family: Verdana, Tahoma, sans-serif;
-        font-weight: bold;
-        font-size: 30px;
-        border-radius: 50px;
-        border: 0;
-        padding: 15px 25px 15px;
-        margin-right: 20px;
-
-        color: {{color}};
-        background-color: #2a8d88;
-    }
-    button:hover, a:hover { text-decoration: none; 
-                color: white;}
-    .btnbox{
-        margin-left: 49%;
-    }
-
-    h1{
-        font-family: Verdana, Tahoma, sans-serif;
-        font-weight: bold;
-        font-size: 40;
-        text-align: center;
-        color: #2a8d88;
-    }
+ .body{overflow-x: hidden;width: 100%;background-color: {{color}};}
+ .title{font-family: Verdana, Tahoma, sans-serif;font-weight: bold;font-size: 58;display: inline-block;margin-right: 60%;margin-left: 1.5%;color: {{title_color}};}
+ .titlediv{padding-left: 2%;padding-right: 2%;width: 100%;}
+ .nav_a{display: inline-block;font-family: Verdana, Tahoma, sans-serif;font-weight: bold;font-size: 32;border-radius: 50px;border: 0;padding: 5px 20px 5px;margin-right: 1%;color: white;background-color: {{title_color}};}
+ .nav_a:hover{color:{{color}};}
+ a:link {text-decoration: none;}
+ a:visited {text-decoration: none;}
+ a:hover {text-decoration: none;color: {{color}};}
+ .formcontainer{width: 60%;margin-left: 20%;padding-top: 35px;border-top: 2px solid {{title_color}};}
+ input{padding: 20px 50px 20px;font-size: 20px;display: inline-block;margin: 0 auto;width: 45%;margin-left: 2.5%;border: solid 1px;margin-bottom: 35px;border-radius: 50px;color: {{title_color}};background-color: white;border-color: {{title_color}};}
+ ::placeholder{color: {{title_color}};}button, a{font-family: Verdana, Tahoma, sans-serif;font-weight: bold;font-size: 30px;border-radius: 50px;border: 0;padding: 15px 25px 15px;margin-right: 20px;color: {{color}};background-color: {{title_color}};}
+ button:hover, a:hover {text-decoration: none;color: white;}
+ h1{font-family: Verdana, Tahoma, sans-serif;font-weight: bold;font-size: 40;text-align: center;color: {{title_color}};}
+ .btnbox{margin-left: 49%;}
 </style>
 
 <!Doctype html>
