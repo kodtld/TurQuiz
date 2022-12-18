@@ -1,8 +1,7 @@
 from app import app
-from db import db, Users, Quizs, Questions
+from db import Users
 from flask_login import login_user, login_required, logout_user, current_user
-from flask import render_template, redirect, session, request, url_for, flash
-
+from flask import render_template, redirect, request, url_for, flash
 from random import choice, shuffle
 
 from models.color import colors, title_colors
@@ -16,11 +15,14 @@ from forms.answerform import AnswerForm
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from rank import get_rankcolor, get_ranks
+from services import rankservice, answerservice
 
-from compare_answers import compare_answers
+from queries.user_queries import add_user, get_user
+from queries.quiz_queries import (add_quiz, get_created_quiz, add_question, get_questions,
+                                get_user_quizzes, get_community_quizzes, delete_quiz, delete_empty_quiz)
 
-from threads import add_user, add_quiz, get_created_quiz, get_user ,add_answerank,add_createrank,add_question, delete_empty_quiz,update_answerank_amount,get_questions, get_user_quizzes, get_community_quizzes, delete_quiz, save_highscore, get_highscores
+from queries.highscore_queries import get_highscores, save_highscore
+from queries.rank_queries import add_answerank, add_createrank, update_answerank_amount
 
 @app.route("/")
 def index():
@@ -122,20 +124,21 @@ def answer(subject, subject_id):
 
         checknumber = 0        
         questions = get_questions(subject_id)
+        
         if len(questions) == 0:
                 delete_empty_quiz(subject_id)
                 return render_template('empty.html', color = color.code, title_color = title_color.code)
         else:
                 form = AnswerForm(questions)
                 right_answers = form.rigth_answers
-                
+        
                 for question in form.new_questions:
                         shuffle(question[1])
 
                         if request.method == 'POST' and checknumber == 0:
                                 if len(request.values) == len(right_answers):
                                         checknumber +=1
-                                        score = compare_answers(right_answers, request.values)
+                                        score = answerservice.compare_answers(right_answers, request.values)
                                         score = (int(score) * 777)
                                         update_answerank_amount(current_user.id)
                                         return redirect(url_for('myscore', subject=subject, subject_id=subject_id, score=score))
@@ -182,10 +185,10 @@ def my_scores():
         title_color = title_colors[0]
 
         quiz_and_score = get_highscores(current_user.id)
-        ranks = get_ranks(current_user.id)
+        ranks = rankservice.get_ranks(current_user.id)
 
-        answer_rankcolor_code = get_rankcolor(ranks[1])
-        create_rankcolor_code = get_rankcolor(ranks[3])
+        answer_rankcolor_code = rankservice.get_rankcolor(ranks[1])
+        create_rankcolor_code = rankservice.get_rankcolor(ranks[3])
         
         return render_template('my_scores.html', color = color.code, title_color = title_color.code, 
                 quiz_and_score = quiz_and_score, answer_rankcolor_code = answer_rankcolor_code.code, 

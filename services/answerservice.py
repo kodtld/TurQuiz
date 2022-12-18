@@ -5,9 +5,6 @@ def compare_answers(right_answers,user_answers):
     right_answer_values = [i[1] for i in right_answers]
     counter = 0
 
-    print(user_answer_values)
-    print(right_answer_values)
-
     if len(user_answer_values) == len(right_answer_values):
         for i in range(0,len(right_answer_values)):
             if right_answer_values[i] == user_answer_values[i] :

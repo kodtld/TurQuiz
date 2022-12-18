@@ -1,5 +1,5 @@
 from models.color import rank_colors
-from threads import get_answerank, get_createrank, update_answerank_level, update_createrank
+from queries.rank_queries import get_answerank, get_createrank, update_answerank_level, update_createrank
 
 def get_ranks(user_id):
     call_update_answerank(user_id, get_answerank(user_id)[0])
