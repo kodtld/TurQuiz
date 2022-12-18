@@ -85,7 +85,7 @@ def login():
             if check_password_hash(user.password, form.password.data):
                 login_user(user, remember=True)
                 return redirect(url_for('dash'))
-            flash("Invalid username or password!")
+        flash("Invalid username or password!")
     return render_template('login.html', color = color.code, title_color = title_color.code,
         form = form)
 
